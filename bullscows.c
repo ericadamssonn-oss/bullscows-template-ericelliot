@@ -1,0 +1,142 @@
+/*
+ *     The bulls and cows game
+ *     See https://en.wikipedia.org/wiki/Bulls_and_Cows
+ *
+ *     See bulls_and_cows.pdf for more instructions
+ */
+
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define TEST true      // If true, only run the tests else run the main program
+#define DEBUG false    // If true, print answer to the console at the beginning of the game
+
+
+
+// Testing of functions, see implementation in the end of the file
+void test();
+
+// *********************************************************
+// ----------- Declaration functions used in main ----------
+// *********************************************************
+
+// Returns true if one of the digits in number is equal to digit.
+int digit_is_in(int number, int digit);
+
+// Generates an N-digit random number with no repeated digits
+// (digits in range 1-9)
+int get_random_4digit();
+
+// Returns number of bulls in guessed number
+int count_bulls(int guess, int answer);
+
+// Returns number of bulls and cows in guessed number
+int count_cows_and_bulls(int guess, int answer);
+
+// Reads player input from console
+int get_player_guess();
+
+// Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.
+int check_guess_format(int guess);
+
+// Prints the game instructions for player
+void print_instructions();
+
+// *********************************************************
+// -----------           Main                     ----------
+// *********************************************************
+
+int main(void) {
+    setbuf(stdout, 0);
+    // Required to force printf printing to console during debugging
+
+    srand(time(NULL)); // Initialise random number generator
+
+    if (TEST) {
+        test();
+    }
+
+    int answer = get_random_4digit();
+
+    if (DEBUG) {
+        printf("Answer is %d\n", answer);
+    }
+
+    print_instructions();
+
+    bool aborted = false;
+    bool guessed = false;
+    int number_of_guesses = 0;
+    int current_guess = 0;
+    int bulls = 0;
+    int cows = 0;
+
+    // *********************************
+    // -------    Game loop   ----------
+    // *********************************
+
+    do {
+        current_guess = get_player_guess();
+
+    } while ();
+
+    // After game loop
+    if (aborted) {
+        printf("Game aborted\n");
+    } else {
+        printf("Done, number was %d you needed %d guess(es)\n", answer,
+               number_of_guesses);
+    }
+    return 0;
+}
+
+// *********************************************************
+// -----------      Function implementation     ----------
+// *********************************************************
+
+int get_random_4digit() {
+    return 1234;
+}
+
+int digit_is_in(int number, int digit) {
+    // TODO: implement function bodies.
+}
+
+
+// *********************************************************
+// -----------           Test                     ----------
+// *********************************************************
+
+// ---------------- Testing --------------------
+void assert(bool v1, bool v2) {
+    if (v1 == v2)
+        printf("Test passed\n");
+    else
+        printf("Test failed\n");
+}
+
+void test() {
+    printf("running tests\n");
+
+    // TODO: Uncomment the lines to test the functions that you have implemented
+
+    // printf("\nPrinting 10 random numbers\n");
+    // for (int i = 0; i < 10; i++)
+    //     printf("Random answer %d\n", get_random_4digit());
+    //
+    // printf("\nTesting digit_is_in\n");
+    // assert(digit_is_in(2637, 2), true);
+    // assert(digit_is_in(2637, 4), false);
+    //
+    // printf("\nTesting count_bulls\n");
+    // assert(count_bulls(1827, 7814), 1);
+    // assert(count_bulls(2647, 2837), 2);
+    //
+    // printf("\nTesting count_cows_and_bulls\n");
+    // assert(count_cows_and_bulls(1827, 7813), 3);
+    // assert(count_cows_and_bulls(2647, 2837), 2);
+
+    exit(0); // End program
+}

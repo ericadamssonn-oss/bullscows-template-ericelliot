@@ -69,29 +69,20 @@ int count_bulls(int guess, int answer);
 int count_cows_and_bulls(int guess, int answer);
 
 // Reads player input from console
-int get_player_guess();
-int guess=0;
+int get_player_guess=0;
 printf("skriv din gisning:");
-scanf("%i", &guess);
-return guess;
+scanf("%i", &get_player_guess);
+return get_player_guess;
 
-// Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.int check_guess_format(int guess);
-int du4=guess %10;
-while (du4>9 || du4<1) {
-    printf("error")
-    return
-
-}
-
+// Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.
+int check_guess_format(int guess);
+if (guess)
 
 
 for (int i=0; i<4; i++) {
-    if (guess % 10 == answer %10);
-    {
+    if (guess % 10 = answer %10);
         bulls++;
-    }
-    guess/=10;
-    answer/=10;
+}
 }
 
 

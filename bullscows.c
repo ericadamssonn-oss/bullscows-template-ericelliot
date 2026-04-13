@@ -1,7 +1,6 @@
 /*
  *     The bulls and cows game
  *     See https://en.wikipedia.org/wiki/Bulls_and_Cows
- *
  *     See bulls_and_cows.pdf for more instructions
  */
 
@@ -69,20 +68,33 @@ int count_bulls(int guess, int answer);
 int count_cows_and_bulls(int guess, int answer);
 
 // Reads player input from console
-int get_player_guess=0;
-printf("skriv din gisning:");
-scanf("%i", &get_player_guess);
-return get_player_guess;
+int get_player_guess(){
 
-// Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.
-int check_guess_format(int guess);
-if (guess)
+int guess=0;
+printf("skriv din gisning:");
+scanf("%i", &guess);
+return guess;
+}
+// Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.int check_guess_format(int guess);
+int sizeofguess(int guess){
+
+    int size= 0;
+    while (guess > 0) {
+        guess / 10;
+        size++;
+    }
+
+}
+
 
 
 for (int i=0; i<4; i++) {
-    if (guess % 10 = answer %10);
+    if (guess % 10 == answer %10);
+    {
         bulls++;
-}
+    }
+    guess/=10;
+    answer/=10;
 }
 
 
@@ -91,7 +103,7 @@ for (int i=0; i<4; i++) {
 void print_instructions() {
 
     printf("Welcome to Bulls and Cows\n Try to guess a 4 digit number with digits from 1-9\n and no repeating digits (-1 to abort)");
-    printf("\n\n")
+    printf("\n\n");
     printf("Bulls = Correct digits in correct posistions.\n Cows = Correct digits in wrong positions");
 }
 

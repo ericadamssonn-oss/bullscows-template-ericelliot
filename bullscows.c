@@ -67,10 +67,16 @@ int count_cows_and_bulls(int guess, int answer);
 
 // Reads player input from console
 int get_player_guess();
+int guess;
+printf("skriv din gisning:");
 scanf("%i", &get_player_guess);
+return guess;
 
 // Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.
 int check_guess_format(int guess);
+if ()
+
+
 
 // Prints the game instructions for player
 void print_instructions();

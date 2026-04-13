@@ -34,16 +34,30 @@ int digit_is_in(int number, int digit) {
 // Generates an N-digit random number with no repeated digits
 // (digits in range 1-9)
 int get_random_4digit() {
-    int siffra_1 = 0;
-    int siffra_2 = 0;
-    int siffra_3 = 0;
-    int siffra_4 = 0;
-    while (digit =!)
-    rand() % 9 + 1;
+    //sätter alla siffror till 0
+    int d1, d2, d3, d4 = 0;
+    //slumpar första siffran
+    d1 = rand() % 9 + 1;
 
-    while ()
-    number == ( (siffra_1 * 1000) + (siffra_2 * 100) + (siffra_3 * 10) + (siffra_4 * 1) );
+    //slumpar andra siffran, slumpar bara siffran då d2 = 0 eller om första
+    //siffran är lika med andra siffran, vilket då gör att den kommer slumpa
+    //tills siffran inte är den samma som första sa denb blir undik.
+    while (d2 == 0 || d1 == d2) {
+        d2 = rand() % 9 + 1;
+    }
 
+   // slumpar 3e siffran
+   while (d3 == 0 || d3 == d1 || d3 == d2) {
+        d3 = rand() % 9 + 1;
+    }
+    //slumpar fjärde siffran
+    while (d4 == 0 || d4 == d1 || d4 == d2 || d4 == d3) {
+        d4 = rand() % 9 + 1;
+    }
+    //bygger ihop talet med våra siffror. Multiplicerar med 10 potensen och adderar
+    //till ett fullständigt tal
+    number == ( (d1 * 1000) + (d2 * 100) + (d3 * 10) + (d4 * 1) );
+    return number;
 }
 // Returns number of bulls in guessed number
 int count_bulls(int guess, int answer);

@@ -23,12 +23,28 @@ void test();
 // *********************************************************
 
 // Returns true if one of the digits in number is equal to digit.
-int digit_is_in(int number, int digit);
+int digit_is_in(int number, int digit) {
+    while (number > 0) {
+        if (number % 10 == digit) return 1;
+        number /= 10;
+    }
+    return 0;
+}
 
 // Generates an N-digit random number with no repeated digits
 // (digits in range 1-9)
-int get_random_4digit();
+int get_random_4digit() {
+    int siffra_1 = 0;
+    int siffra_2 = 0;
+    int siffra_3 = 0;
+    int siffra_4 = 0;
+    while (digit =!)
+    rand() % 9 + 1;
 
+    while ()
+    number == ( (siffra_1 * 1000) + (siffra_2 * 100) + (siffra_3 * 10) + (siffra_4 * 1) );
+
+}
 // Returns number of bulls in guessed number
 int count_bulls(int guess, int answer);
 

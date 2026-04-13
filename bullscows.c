@@ -35,7 +35,10 @@ int digit_is_in(int number, int digit) {
 // (digits in range 1-9)
 int get_random_4digit() {
     //sätter alla siffror till 0
-    int d1, d2, d3, d4 = 0;
+    int d1=0;
+    int d2=0;
+    int d3=0;
+    int d4=0;
     //slumpar första siffran
     d1 = rand() % 9 + 1;
 
@@ -66,15 +69,20 @@ int count_bulls(int guess, int answer);
 int count_cows_and_bulls(int guess, int answer);
 
 // Reads player input from console
-int get_player_guess();
-int guess;
+int get_player_guess=0;
 printf("skriv din gisning:");
 scanf("%i", &get_player_guess);
-return guess;
+return get_player_guess;
 
 // Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.
 int check_guess_format(int guess);
-if ()
+if (guess)
+
+
+for (int i=0; i<4; i++) {
+    if (guess % 10 = answer %10);
+        bulls++;
+}
 
 
 

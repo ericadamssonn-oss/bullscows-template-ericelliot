@@ -31,7 +31,7 @@ int get_random_4digit() {
     int d4=0;
     int number; // Deklarerad för att kunna användas nedan
 
-    //slumpar första  siffran
+    //slumpar första siffran
     d1 = rand() % 9 + 1;
 
     //slumpar andra siffran, slumpar bara siffran då d2 = 0 eller om första
@@ -122,10 +122,6 @@ int check_guess_format(int guess) {
 
     }
 
-
-    return -2;
-
-}
 
 // Prints the game instructions for player
 void print_instructions() {

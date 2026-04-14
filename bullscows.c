@@ -3,14 +3,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define TEST true
-#define DEBUG false
+#define TEST false
+#define DEBUG true
 
-void test();
-
-// *********************************************************
-// ----------- Declaration functions used in main ----------
-// *********************************************************
 
 // Returns true if one of the digits in number is equal to digit.
 int digit_is_in(int number, int digit) {
@@ -84,7 +79,7 @@ int count_cows_and_bulls(int guess, int answer) {
 // Reads player input from console
 int get_player_guess() {
     int guess = 0;
-    printf("skriv din gisning:");
+    printf("\n Skriv din gisning:");
     scanf("%i", &guess);
     return guess;
 }
@@ -112,7 +107,7 @@ int check_guess_format(int guess) {
         // kollar så talen är mellan 1-9
         if (digit1>= 1 && digit1<=9 && digit2>= 1 && digit2<=9 && digit3>= 1 && digit3<=9 && digit4>= 1 && digit4<=9){
             // kolla efter dubbleter
-            if (digit1 != digit2 && digit1 != digit3 && digit1 != digit4 && digit2 != digit3 && digit2 != digit4 && digit3 != digit4 &&) {
+            if (digit1 != digit2 && digit1 != digit3 && digit1 != digit4 && digit2 != digit3 && digit2 != digit4 && digit3 != digit4) {
                 return guess;
             }
         }
@@ -125,9 +120,9 @@ int check_guess_format(int guess) {
 
 // Prints the game instructions for player
 void print_instructions() {
-    printf("Welcome to Bulls and Cows\n Try to guess a 4 digit number with digits from 1-9\n and no repeating digits (-1 to abort)");
-    printf("\n\n"); // Lade till ett semikolon här
-    printf("Bulls = Correct digits in correct posistions.\n Cows = Correct digits in wrong positions\n");
+    printf("Welcome to Bulls and Cows\nTry to guess a 4 digit number with digits from 1-9\nand no repeating digits (-1 to abort)");
+    printf("\n"); // Lade till ett semikolon här
+    printf("Bulls = Correct digits in correct posistions.\nCows = Correct digits in wrong positions\n");
 }
 
 // *********************************************************
@@ -136,4 +131,52 @@ void print_instructions() {
 
 int main(void) {
 
+     setbuf(stdout, 0);
+     srand(time(NULL));
+
+
+      int answer = get_random_4digit();
+
+      if (DEBUG) {
+          printf("Answer is %d\n", answer);
+      }
+
+      print_instructions();
+
+      bool aborted = false;
+      bool guessed = false;
+      int number_of_guesses = 0;
+      int current_guess = 0;
+      int bulls = 0;
+      int cows = 0;
+
+      do {
+          current_guess = get_player_guess();
+
+          if (current_guess == -1) {
+              aborted = true;
+          } else if (check_guess_format(current_guess) == -2) {
+              // Gissningen är ogiltig - fortsätt loopen utan att räkna det
+              continue;
+          } else {
+              number_of_guesses++;
+              bulls = count_bulls(current_guess, answer);
+              int total = count_cows_and_bulls(current_guess, answer);
+              cows = total - bulls;
+
+              printf("Bulls: %d, Cows: %d\n", bulls, cows);
+
+              if (bulls == 4) {
+                  guessed = true;
+              }
+          }
+
+      } while (!guessed && !aborted);
+
+      if (aborted) {
+          printf("Game aborted\n");
+      } else {
+          printf("Done, number was %d you needed %d guess(es)\n", answer, number_of_guesses);
+      }
+      return 0;
 }

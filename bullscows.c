@@ -31,7 +31,7 @@ int get_random_4digit() {
     int d4=0;
     int number; // Deklarerad för att kunna användas nedan
 
-    //slumpar första  siffran
+    //slumpar första siffran
     d1 = rand() % 9 + 1;
 
     //slumpar andra siffran, slumpar bara siffran då d2 = 0 eller om första
@@ -91,40 +91,11 @@ int get_player_guess() {
 
 // Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.
 int check_guess_format(int guess) {
-    int digit4 = 0;
-    int digit3 = 0;
-    int digit2 = 0;
-    int digit1 = 0;
-    int nytttal= 0;
-
-    int size = 0;
-
-    //abort game
-    if (guess == -1) {
-        return -1;
-    }
-
-    while (guess > 0 ) {
-        guess / 10;
-        size++;
-    }
-
-    if (size == 4) {
-
-        digit4 = guess %10;
-        while (digit4 >=1 && digit4 <= 9) {
-            nytttal = guess/10;
-            digit3  = nytttal %10;
-
-        }
+    if (guess == -1) return -1;
 
 
 
-    }
-
-
-    return -2;
-
+    return guess;
 }
 
 // Prints the game instructions for player

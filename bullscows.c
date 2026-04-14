@@ -4,7 +4,8 @@
 #include <time.h>
 
 #define TEST true
-#define DEBUG false
+#define DEBUG true
+
 
 void test();
 
@@ -105,14 +106,14 @@ int check_guess_format(int guess) {
         size++;
     }
     if (size == 4) {
-        int digit4 =(gues) % 10;
+        int digit4 =(guess) % 10;
         int digit3 = (guess/10) % 10;
-        int digit2 = (guess/100) %10
-        int digit1 = (guess/1000) %10
+        int digit2 = (guess/100) %10;
+        int digit1 = (guess/1000) %10;
         // kollar så talen är mellan 1-9
         if (digit1>= 1 && digit1<=9 && digit2>= 1 && digit2<=9 && digit3>= 1 && digit3<=9 && digit4>= 1 && digit4<=9){
             // kolla efter dubbleter
-            if (digit1 != digit2 && digit1 != digit3 && digit1 != digit4 && digit2 != digit3 && digit2 != digit4 && digit3 != digit4 &&) {
+            if (digit1 != digit2 && digit1 != digit3 && digit1 != digit4 && digit2 != digit3 && digit2 != digit4 && digit3 != digit4) {
                 return guess;
             }
         }

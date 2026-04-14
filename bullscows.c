@@ -88,9 +88,9 @@ int get_player_guess() {
 int check_guess_format(int guess) {
 
     int size = 0;
-    int temp = guess;
+    int temp = guess; // sparar din gissning
 
-    //abort game
+    //kollar om dit tal har 4 siffror
     if (guess == -1) {
         return -1;
     }
@@ -100,6 +100,7 @@ int check_guess_format(int guess) {
         size++;
     }
     if (size == 4) {
+        // tar reda på ditt gissade tal
         int digit4 =(guess) % 10;
         int digit3 = (guess/10) % 10;
         int digit2 = (guess/100) %10;
@@ -130,7 +131,6 @@ void print_instructions() {
 // *********************************************************
 
 int main(void) {
-
      setbuf(stdout, 0);
      srand(time(NULL));
 

@@ -91,38 +91,33 @@ int get_player_guess() {
 
 // Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.
 int check_guess_format(int guess) {
-    int digit4 = 0;
-    int digit3 = 0;
-    int digit2 = 0;
-    int digit1 = 0;
-    int nytttal= 0;
 
     int size = 0;
+    int temp = guess;
 
     //abort game
     if (guess == -1) {
         return -1;
     }
 
-    while (guess > 0 ) {
-        guess / 10;
+    while (temp > 0 ) {
+        temp /= 10;
         size++;
     }
-
     if (size == 4) {
-
-        digit4 = guess %10;
-        while (digit4 >=1 && digit4 <= 9) {
-            nytttal = guess/10;
-            digit3  = nytttal %10;
-
+        int digit4 =(gues) % 10;
+        int digit3 = (guess/10) % 10;
+        int digit2 = (guess/100) %10
+        int digit1 = (guess/1000) %10
+        // kollar så talen är mellan 1-9
+        if (digit1>= 1 && digit1<=9 && digit2>= 1 && digit2<=9 && digit3>= 1 && digit3<=9 && digit4>= 1 && digit4<=9){
+            // kolla efter dubbleter
+            if (digit1 != digit2 && digit1 != digit3 && digit1 != digit4 && digit2 != digit3 && digit2 != digit4 && digit3 != digit4 &&) {
+                return guess;
+            }
         }
-
-
-
     }
-
-
+    printf("error")// error fel inmatning
     return -2;
 
 }

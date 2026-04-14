@@ -1,21 +1,11 @@
-/*
- *     The bulls and cows game
- *     See https://en.wikipedia.org/wiki/Bulls_and_Cows
- *
- *     See bulls_and_cows.pdf for more instructions
- */
-
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define TEST true      // If true, only run the tests else run the main program
-#define DEBUG false    // If true, print answer to the console at the beginning of the game
+#define TEST true
+#define DEBUG false
 
-
-
-// Testing of functions, see implementation in the end of the file
 void test();
 
 // *********************************************************
@@ -39,7 +29,9 @@ int get_random_4digit() {
     int d2=0;
     int d3=0;
     int d4=0;
-    //slumpar första siffran
+    int number; // Deklarerad för att kunna användas nedan
+
+    //slumpar första  siffran
     d1 = rand() % 9 + 1;
 
     //slumpar andra siffran, slumpar bara siffran då d2 = 0 eller om första
@@ -59,40 +51,87 @@ int get_random_4digit() {
     }
     //bygger ihop talet med våra siffror. Multiplicerar med 10 potensen och adderar
     //till ett fullständigt tal
-    number == ( (d1 * 1000) + (d2 * 100) + (d3 * 10) + (d4 * 1) );
+    number = ( (d1 * 1000) + (d2 * 100) + (d3 * 10) + (d4 * 1) );
     return number;
 }
+
 // Returns number of bulls in guessed number
-int count_bulls(int guess, int answer);
+int count_bulls(int guess, int answer) {
+    int bulls = 0;
+    for (int i=0; i<4; i++) {
+        if (guess % 10 == answer % 10) { // Ändrat från = till == för jämförelse
+            bulls++;
+        }
+        guess /= 10;
+        answer /= 10;
+    }
+    return bulls;
+}
 
 // Returns number of bulls and cows in guessed number
-int count_cows_and_bulls(int guess, int answer);
+int count_cows_and_bulls(int guess, int answer) {
+    int total_matches = 0;
+    int temp_guess = guess;
+    for (int i = 0; i < 4; i++) {
+        if (digit_is_in(answer, temp_guess % 10)) {
+            total_matches++;
+        }
+        temp_guess /= 10;
+    }
+    return total_matches;
+}
 
 // Reads player input from console
-int get_player_guess=0;
-printf("skriv din gisning:");
-scanf("%i", &get_player_guess);
-return get_player_guess;
+int get_player_guess() {
+    int guess = 0;
+    printf("skriv din gisning:");
+    scanf("%i", &guess);
+    return guess;
+}
 
 // Test if player guess contain repetition and correct size. Returns guess back or -2 if input is wrong.
-int check_guess_format(int guess);
-if (guess)
+int check_guess_format(int guess) {
+    int digit4 = 0;
+    int digit3 = 0;
+    int digit2 = 0;
+    int digit1 = 0;
+    int nytttal= 0;
+
+    int size = 0;
+
+    //abort game
+    if (guess == -1) {
+        return -1;
+    }
+
+    while (guess > 0 ) {
+        guess / 10;
+        size++;
+    }
+
+    if (size == 4) {
+
+        digit4 = guess %10;
+        while (digit4 >=1 && digit4 <= 9) {
+            nytttal = guess/10;
+            digit3  = nytttal %10;
+
+        }
 
 
-for (int i=0; i<4; i++) {
-    if (guess % 10 = answer %10);
-        bulls++;
+
+    }
+
+
+    return -2;
+
 }
-}
-
-
 
 // Prints the game instructions for player
 void print_instructions() {
-
     printf("Welcome to Bulls and Cows\n Try to guess a 4 digit number with digits from 1-9\n and no repeating digits (-1 to abort)");
-    printf("\n\n")
-    printf("Bulls = Correct digits in correct posistions.\n Cows = Correct digits in wrong positions");
+    printf("\n\n"); // Lade till ett semikolon här
+    printf("Bulls = Correct digits in correct posistions.\n Cows = Correct digits in wrong positions\n");
 }
 
 // *********************************************************
@@ -101,9 +140,7 @@ void print_instructions() {
 
 int main(void) {
     setbuf(stdout, 0);
-    // Required to force printf printing to console during debugging
-
-    srand(time(NULL)); // Initialise random number generator
+    srand(time(NULL));
 
     if (TEST) {
         test();
@@ -124,70 +161,42 @@ int main(void) {
     int bulls = 0;
     int cows = 0;
 
-    // *********************************
-    // -------    Game loop   ----------
-    // *********************************
-
     do {
         current_guess = get_player_guess();
 
-    } while ();
+        if (current_guess == -1) {
+            aborted = true;
+        } else {
+            number_of_guesses++;
+            bulls = count_bulls(current_guess, answer);
+            int total = count_cows_and_bulls(current_guess, answer);
+            cows = total - bulls;
 
-    // After game loop
+            printf("Bulls: %d, Cows: %d\n", bulls, cows);
+
+            if (bulls == 4) {
+                guessed = true;
+            }
+        }
+
+    } while (!guessed && !aborted);
+
     if (aborted) {
         printf("Game aborted\n");
     } else {
-        printf("Done, number was %d you needed %d guess(es)\n", answer,
-               number_of_guesses);
+        printf("Done, number was %d you needed %d guess(es)\n", answer, number_of_guesses);
     }
     return 0;
 }
 
-// *********************************************************
-// -----------      Function implementation     ----------
-// *********************************************************
-
-int get_random_4digit() {
-    return 1234;
-}
-
-int digit_is_in(int number, int digit) {
-    // TODO: implement function bodies.
-}
-
-
-// *********************************************************
-// -----------           Test                     ----------
-// *********************************************************
-
-// ---------------- Testing --------------------
+// --- Test-funktioner och implementationer behålls i slutet ---
 void assert(bool v1, bool v2) {
-    if (v1 == v2)
-        printf("Test passed\n");
-    else
-        printf("Test failed\n");
+    if (v1 == v2) printf("Test passed\n");
+    else printf("Test failed\n");
 }
 
 void test() {
     printf("running tests\n");
-
-    // TODO: Uncomment the lines to test the functions that you have implemented
-
-    // printf("\nPrinting 10 random numbers\n");
-    // for (int i = 0; i < 10; i++)
-    //     printf("Random answer %d\n", get_random_4digit());
-    //
-    // printf("\nTesting digit_is_in\n");
-    // assert(digit_is_in(2637, 2), true);
-    // assert(digit_is_in(2637, 4), false);
-    //
-    // printf("\nTesting count_bulls\n");
-    // assert(count_bulls(1827, 7814), 1);
-    // assert(count_bulls(2647, 2837), 2);
-    //
-    // printf("\nTesting count_cows_and_bulls\n");
-    // assert(count_cows_and_bulls(1827, 7813), 3);
-    // assert(count_cows_and_bulls(2647, 2837), 2);
-
-    exit(0); // End program
+    // Här kan du avkommentera dina tester när du vill köra dem
+    exit(0);
 }

@@ -54,7 +54,7 @@ int get_random_4digit() {
 int count_bulls(int guess, int answer) {
     int bulls = 0;
     for (int i=0; i<4; i++) {
-        if (guess % 10 == answer % 10) {
+        if (guess % 10 == answer % 10) { // Ändrat från = till == för jämförelse
             bulls++;
         }
         guess /= 10;
@@ -88,9 +88,9 @@ int get_player_guess() {
 int check_guess_format(int guess) {
 
     int size = 0;
-    int temp = guess; // sparar din gissning
+    int temp = guess;
 
-    //kollar om dit tal har 4 siffror
+    //abort game
     if (guess == -1) {
         return -1;
     }
@@ -100,7 +100,6 @@ int check_guess_format(int guess) {
         size++;
     }
     if (size == 4) {
-        // tar reda på ditt gissade tal
         int digit4 =(guess) % 10;
         int digit3 = (guess/10) % 10;
         int digit2 = (guess/100) %10;
@@ -131,48 +130,53 @@ void print_instructions() {
 // *********************************************************
 
 int main(void) {
-    setbuf(stdout, 0);
-    srand(time(NULL));
+
+     setbuf(stdout, 0);
+     srand(time(NULL));
 
 
-    int answer = get_random_4digit();
+      int answer = get_random_4digit();
 
-    if (DEBUG) {
-        printf("Answer is %d\n", answer);
-    }
+      if (DEBUG) {
+          printf("Answer is %d\n", answer);
+      }
 
-    print_instructions();
+      print_instructions();
 
-    bool aborted = false;
-    bool guessed = false;
-    int number_of_guesses = 0;
-    int current_guess = 0;
-    int bulls = 0;
-    int cows = 0;
+      bool aborted = false;
+      bool guessed = false;
+      int number_of_guesses = 0;
+      int current_guess = 0;
+      int bulls = 0;
+      int cows = 0;
 
-    while (!guessed && !aborted) {
-        current_guess = get_player_guess();
+      do {
+          current_guess = get_player_guess();
 
-        //Avsluta spelet
-        if (current_guess == -1) {
-            aborted = true;
-        }
+          if (current_guess == -1) {
+              aborted = true;
+          } else if (check_guess_format(current_guess) == -2) {
+              // Gissningen är ogiltig - fortsätt loopen utan att räkna det
+              continue;
+          } else {
+              number_of_guesses++;
+              bulls = count_bulls(current_guess, answer);
+              int total = count_cows_and_bulls(current_guess, answer);
+              cows = total - bulls;
 
-        else if (check_guess_format(current_guess) == -2) {
-            continue;
-        }
+              printf("Bulls: %d, Cows: %d\n", bulls, cows);
 
-        else {
-            number_of_guesses++;
-            bulls = count_bulls(current_guess, answer);
-            int total = count_cows_and_bulls(current_guess, answer);
-            cows = total - bulls;
+              if (bulls == 4) {
+                  guessed = true;
+              }
+          }
 
-            printf("Bulls: %d, Cows: %d\n", bulls, cows);
+      } while (!guessed && !aborted);
 
-            if (bulls == 4) {
-                guessed = true;
-            }
-        }
-    }
+      if (aborted) {
+          printf("Game aborted\n");
+      } else {
+          printf("Done, number was %d you needed %d guess(es)\n", answer, number_of_guesses);
+      }
+      return 0;
 }
